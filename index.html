@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Adzkiya Mom Baby Care - iOS Liquid Glass Ultra Clear</title>
+    <title>Adzkiya Mom Baby Care - Safe Backup & Auto-Fit Excel</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* --- iOS Liquid Glass UI Theme - Ultra Clear Font Fix --- */
+        /* --- Clean & Crisp UI Theme --- */
         * { 
             box-sizing: border-box; 
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif; 
@@ -17,78 +17,62 @@
         }
         
         :root {
-            --theme-color: #FF5A79; /* Sedikit lebih pekat agar kontras */
-            --theme-glow: rgba(255, 90, 121, 0.35);
-            --bg-gradient: linear-gradient(135deg, #090615 0%, #0f0b21 40%, #20091b 80%, #0b081d 100%);
-            --card-bg: rgba(20, 16, 36, 0.8); /* Dipergelap agar teks putih makin menyala */
-            --card-border: rgba(255, 255, 255, 0.18);
-            --text-main: #FFFFFF; /* Putih solid murni */
-            --text-sub: #E2E8F0;  /* Diubah dari transparan ke abu-abu terang solid agar super jelas */
-            --input-bg: rgba(255, 255, 255, 0.08);
-            --input-border: rgba(255, 255, 255, 0.25); /* Garis border dipertegas */
-            --item-hover: rgba(255, 255, 255, 0.12);
-            --item-border: rgba(255, 255, 255, 0.15);
-            --shadow-fluid: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            --tab-bg: rgba(255, 255, 255, 0.06);
-            --watermark-opacity: 0.05;
-            --glass-blur: blur(30px);
+            --theme-color: #FF5A79; 
+            --theme-glow: rgba(255, 90, 121, 0.2);
+            --bg-gradient: linear-gradient(135deg, #090615 0%, #0f0b21 40%, #1a0816 80%, #0b081d 100%);
+            --card-bg: rgba(20, 16, 36, 0.8); 
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-main: #FFFFFF; 
+            --text-sub: #E2E8F0;  
+            --input-bg: rgba(255, 255, 255, 0.06);
+            --input-border: rgba(255, 255, 255, 0.2); 
+            --item-hover: rgba(255, 255, 255, 0.1);
+            --item-border: rgba(255, 255, 255, 0.12);
+            --shadow-fluid: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            --tab-bg: rgba(255, 255, 255, 0.05);
+            --watermark-opacity: 0.04;
         }
 
         body.light-mode {
             --bg-gradient: linear-gradient(135deg, #e6edf5 0%, #d5e0eb 40%, #fbcfe8 80%, #e2e8f0 100%);
-            --card-bg: rgba(255, 255, 255, 0.85); /* Dipertebal agar tidak silau */
-            --card-border: rgba(0, 0, 0, 0.15);
-            --text-main: #111827; /* Hitam pekat pekat */
-            --text-sub: #374151;  /* Abu-abu gelap solid sangat terbaca */
+            --card-bg: rgba(255, 255, 255, 0.85); 
+            --card-border: rgba(0, 0, 0, 0.12);
+            --text-main: #111827; 
+            --text-sub: #374151;  
             --input-bg: rgba(0, 0, 0, 0.04);
-            --input-border: rgba(0, 0, 0, 0.2); /* Border input lebih kelihatan */
-            --item-hover: rgba(0, 0, 0, 0.05);
-            --item-border: rgba(0, 0, 0, 0.08);
-            --shadow-fluid: 0 40px 80px rgba(15, 23, 42, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            --tab-bg: rgba(0, 0, 0, 0.05);
-            --watermark-opacity: 0.08;
+            --input-border: rgba(0, 0, 0, 0.15); 
+            --item-hover: rgba(0, 0, 0, 0.04);
+            --item-border: rgba(0, 0, 0, 0.06);
+            --shadow-fluid: 0 30px 60px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            --tab-bg: rgba(0, 0, 0, 0.04);
+            --watermark-opacity: 0.07;
         }
 
         body { 
             background: var(--bg-gradient); 
             min-height: 100vh;
-            padding: calc(40px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom)) 20px; 
+            padding: 40px 20px; 
             color: var(--text-main);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            gap: 25px;
             transition: background 0.5s ease;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        body::before, body::after {
-            content: "";
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.5;
-            transition: all 0.5s ease;
-        }
-        body::before { top: 10%; left: -60px; background: var(--theme-color); }
-        body::after { bottom: 10%; right: -60px; background: #2563eb; }
-
-        .container { 
+        .container, .recap-container { 
             position: relative; 
             background: var(--card-bg); 
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--card-border);
-            border-radius: 32px; 
-            padding: 35px 28px; 
+            border-radius: 24px; 
+            padding: 30px 24px; 
             box-shadow: var(--shadow-fluid);
             width: 100%;
-            max-width: 430px; 
-            transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
-            overflow: hidden;
+            max-width: 440px; 
+            transition: background 0.4s ease, border 0.4s ease;
         }
 
         .ui-watermark {
@@ -96,16 +80,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 280px; 
-            height: 280px;
+            width: 260px; 
+            height: 260px;
             object-fit: contain;
             opacity: var(--watermark-opacity);
             pointer-events: none; 
             z-index: 0;
-            transition: opacity 0.4s ease;
         }
 
-        .brand-section, .color-palette, .form-group, .live-total-panel, .btn-block {
+        .brand-section, .color-palette, .form-group, .live-total-panel, .btn-block, .recap-content {
             position: relative;
             z-index: 1;
         }
@@ -114,16 +97,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         h2 { 
-            font-size: 22px; 
-            font-weight: 800; /* Dibuat ultra tebal */
+            font-size: 20px; 
+            font-weight: 800; 
             letter-spacing: -0.5px;
         }
-        h2 .accent-part { color: var(--theme-color); transition: color 0.3s ease; }
-        h2 .neutral-part { color: var(--text-main); margin-left: 4px; font-weight: 700; transition: color 0.3s ease; }
+        h2 .accent-part { color: var(--theme-color); }
+        h2 .neutral-part { color: var(--text-main); margin-left: 4px; font-weight: 700; }
 
         .mode-toggle {
             background: var(--input-bg);
@@ -131,87 +114,72 @@
             color: var(--text-main);
             cursor: pointer;
             font-size: 16px;
-            width: 40px;
-            height: 40px;
-            border-radius: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
-        .mode-toggle:hover { transform: scale(1.05); background: var(--item-hover); }
+        .mode-toggle:hover { transform: scale(1.05); }
 
         .color-palette {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             background: var(--input-bg);
-            padding: 6px;
-            border-radius: 16px;
+            padding: 5px;
+            border-radius: 14px;
             border: 1px solid var(--input-border);
         }
         .color-dot {
-            width: 26px;
-            height: 26px;
-            border-radius: 11px;
+            width: 24px;
+            height: 24px;
+            border-radius: 10px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.2s ease;
         }
-        .color-dot:hover, .color-dot.active { transform: scale(1.12); }
-        .color-dot.active { border-color: var(--text-main); box-shadow: 0 0 10px var(--theme-glow); }
+        .color-dot.active { border-color: var(--text-main); box-shadow: 0 0 8px var(--theme-glow); }
 
-        .form-group { margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
         .form-group label { 
             display: block; 
-            margin-bottom: 8px; 
-            font-weight: 700; /* Label dipertebal */
-            font-size: 12.5px; 
+            margin-bottom: 6px; 
+            font-weight: 700; 
+            font-size: 12px; 
             color: var(--text-sub); 
             letter-spacing: 0.3px;
         }
         
         input[type="text"], input[type="tel"], input[type="number"], input[type="file"] { 
             width: 100%; 
-            padding: 14px 16px; 
+            padding: 12px 14px; 
             background: var(--input-bg);
             border: 1px solid var(--input-border); 
-            border-radius: 16px; 
-            font-size: 15px; 
-            font-weight: 600; /* Tulisan di dalam input dipertebal */
+            border-radius: 12px; 
+            font-size: 14px; 
+            font-weight: 600; 
             color: var(--text-main);
             outline: none; 
-            -webkit-appearance: none;
             transition: all 0.3s ease;
         }
-        input::placeholder {
-            color: var(--text-sub);
-            opacity: 0.6;
-        }
-        input[type="file"] {
-            padding: 11px;
-            font-size: 13px;
-            cursor: pointer;
-        }
+        input[type="file"] { padding: 9px; font-size: 12px; cursor: pointer; }
         input:focus { 
             border-color: var(--theme-color); 
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 4px var(--theme-glow);
+            box-shadow: 0 0 0 3px var(--theme-glow);
         }
-        body.light-mode input:focus { background: #FFFFFF; border-color: var(--theme-color); }
 
         .category-tabs {
             display: flex;
             background: var(--tab-bg);
-            padding: 5px;
-            border-radius: 14px;
+            padding: 4px;
+            border-radius: 12px;
             border: 1px solid var(--input-border);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 6px;
+            gap: 4px;
         }
         .category-tabs::-webkit-scrollbar { display: none; }
         
@@ -220,18 +188,16 @@
             background: transparent;
             border: none;
             color: var(--text-sub);
-            padding: 10px 16px;
-            font-size: 11.5px;
-            font-weight: 700; /* Menu tab teks tebal */
-            border-radius: 11px;
+            padding: 8px 14px;
+            font-size: 11px;
+            font-weight: 700; 
+            border-radius: 9px;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: center;
-            white-space: nowrap;
         }
         .tab-btn.active {
             background: var(--text-main);
-            color: var(--body-bg, #110e20);
+            color: #110e20;
         }
         body.light-mode .tab-btn.active {
             background: #111827;
@@ -240,15 +206,13 @@
 
         .scroll-wrapper { position: relative; width: 100%; }
         .service-list { 
-            max-height: 190px; 
+            max-height: 180px; 
             overflow-y: auto; 
             background: var(--input-bg);
             border: 1px solid var(--input-border);
-            border-radius: 18px; 
+            border-radius: 14px; 
             padding: 4px 0;
-            padding-right: 45px; 
-            scroll-behavior: smooth;
-            overscroll-behavior: contain;
+            padding-right: 40px; 
         }
         .service-list::-webkit-scrollbar { display: none; } 
         .menu-pane { display: none; }
@@ -256,91 +220,147 @@
 
         .scroll-navigation-panel {
             position: absolute;
-            right: 12px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             z-index: 10;
         }
         .scroll-btn {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--input-border);
             color: var(--text-main);
-            width: 28px;
-            height: 28px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: bold;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            font-size: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
-            transition: all 0.2s ease;
         }
-        body.light-mode .scroll-btn { background: rgba(0, 0, 0, 0.08); }
         .scroll-btn:hover { background: var(--theme-color); color: white; }
 
         .service-item { 
             display: flex; 
             align-items: center; 
-            padding: 14px 16px; 
+            padding: 11px 14px; 
             border-bottom: 1px solid var(--item-border); 
             cursor: pointer;
-            transition: background 0.2s ease;
             width: 100%;
         }
         .service-item:hover { background: var(--item-hover); }
-        .service-item.selected { background: rgba(255, 255, 255, 0.15); }
-        body.light-mode .service-item.selected { background: rgba(0, 0, 0, 0.06); }
+        .service-item.selected { background: rgba(255, 255, 255, 0.12); }
+        body.light-mode .service-item.selected { background: rgba(0, 0, 0, 0.05); }
         .service-item:last-child { border-bottom: none; }
         
         input[type="checkbox"] { 
-            width: 20px; 
-            height: 20px; 
-            margin-right: 14px; 
+            width: 18px; 
+            height: 18px; 
+            margin-right: 12px; 
             accent-color: var(--theme-color); 
             cursor: pointer;
             flex-shrink: 0;
         }
         .service-item span { 
-            font-size: 14px; 
-            font-weight: 600; /* Nama treatment dibuat semi-bold agar jelas */
+            font-size: 13px; 
+            font-weight: 600; 
             color: var(--text-main); 
-            line-height: 1.4; 
         }
 
         .live-total-panel {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 24px 0 20px 0;
-            padding: 0 4px;
+            margin: 18px 0 15px 0;
+            padding: 0 2px;
         }
-        .live-total-label { font-size: 12px; color: var(--text-sub); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
-        .live-total-value { font-size: 26px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .live-total-label { font-size: 11px; color: var(--text-sub); text-transform: uppercase; font-weight: 700; }
+        .live-total-value { font-size: 22px; font-weight: 800; color: var(--text-main); }
 
         button.btn-block { 
             width: 100%; 
             background: linear-gradient(180deg, var(--theme-color) 0%, rgba(244, 63, 94, 1) 100%);
             color: white; 
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 16px; 
-            font-size: 16px; 
-            font-weight: 700; /* Tulisan tombol tebal solid */
-            border-radius: 18px; 
+            padding: 14px; 
+            font-size: 15px; 
+            font-weight: 700; 
+            border-radius: 14px; 
             cursor: pointer; 
-            transition: all 0.2s ease; 
-            box-shadow: 0 12px 30px var(--theme-glow);
+            box-shadow: 0 10px 20px var(--theme-glow);
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
         }
-        button.btn-block:hover { 
-            opacity: 0.95; 
-            box-shadow: 0 15px 35px var(--theme-glow);
-            transform: translateY(-1px);
+        button.btn-block:hover { transform: translateY(-1px); opacity: 0.95; }
+        button.btn-block:active { transform: scale(0.99); }
+        
+        button.btn-secondary {
+            background: var(--input-bg);
+            color: var(--text-main);
+            border: 1px solid var(--input-border);
+            box-shadow: none;
         }
-        button.btn-block:active { transform: scale(0.98); }
+        button.btn-secondary:hover { background: var(--item-hover); }
+
+        /* --- Recap Styles --- */
+        .recap-container { padding: 22px 20px; }
+        .recap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .recap-header h3 { font-size: 15px; font-weight: 800; }
+        .recap-action-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .recap-list {
+            max-height: 240px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .recap-list::-webkit-scrollbar { width: 4px; }
+        .recap-list::-webkit-scrollbar-thumb { background: var(--input-border); border-radius: 4px; }
+        
+        .recap-item {
+            background: var(--input-bg);
+            border: 1px solid var(--item-border);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            position: relative;
+        }
+        .recap-item .name { font-weight: 700; color: var(--text-main); margin-bottom: 3px; }
+        .recap-item .details { color: var(--text-sub); opacity: 0.85; font-size: 11px; margin-bottom: 2px; }
+        .recap-item .price { font-weight: 800; color: var(--theme-color); text-align: right; margin-top: 4px; font-size: 13px; }
+        .btn-delete {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: #f43f5e;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .security-section {
+            border-top: 1px dashed var(--input-border);
+            margin-top: 12px;
+            padding-top: 12px;
+            display: flex;
+            gap: 6px;
+            justify-content: space-between;
+        }
+        .hidden-file-input { display: none; }
     </style>
 </head>
 <body>
@@ -350,15 +370,15 @@
 
     <div class="brand-section">
         <h2><span class="accent-part">Adzkiya</span><span class="neutral-part">Mom Baby Care</span></h2>
-        <button class="mode-toggle" onclick="toggleUIVisualMode()" aria-label="Toggle Theme">🌓</button>
+        <button class="mode-toggle" onclick="toggleUIVisualMode()">🌓</button>
     </div>
 
     <div class="color-palette">
-        <div class="color-dot active" style="background: #FF5A79;" onclick="changeUITheme('#FF5A79', 'rgba(255, 90, 121, 0.35)')"></div>
-        <div class="color-dot" style="background: #2DD4BF;" onclick="changeUITheme('#2DD4BF', 'rgba(45, 212, 191, 0.35)')"></div>
-        <div class="color-dot" style="background: #3B82F6;" onclick="changeUITheme('#3B82F6', 'rgba(59, 130, 246, 0.35)')"></div>
-        <div class="color-dot" style="background: #A855F7;" onclick="changeUITheme('#A855F7', 'rgba(168, 85, 247, 0.35)')"></div>
-        <div class="color-dot" style="background: #F59E0B;" onclick="changeUITheme('#F59E0B', 'rgba(245, 158, 11, 0.35)')"></div>
+        <div class="color-dot active" style="background: #FF5A79;" onclick="changeUITheme('#FF5A79', 'rgba(255, 90, 121, 0.2)', this)"></div>
+        <div class="color-dot" style="background: #2DD4BF;" onclick="changeUITheme('#2DD4BF', 'rgba(45, 212, 191, 0.2)', this)"></div>
+        <div class="color-dot" style="background: #3B82F6;" onclick="changeUITheme('#3B82F6', 'rgba(59, 130, 246, 0.2)', this)"></div>
+        <div class="color-dot" style="background: #A855F7;" onclick="changeUITheme('#A855F7', 'rgba(168, 85, 247, 0.2)', this)"></div>
+        <div class="color-dot" style="background: #F59E0B;" onclick="changeUITheme('#F59E0B', 'rgba(245, 158, 11, 0.2)', this)"></div>
     </div>
 
     <div class="form-group">
@@ -400,9 +420,35 @@
     </div>
 
     <button class="btn-block" onclick="generatePremiumInvoicePDF()">Cetak PDF Kwitansi</button>
+    <button class="btn-block btn-secondary" onclick="saveCustomerToRecap()">Simpan ke Rekapan Data</button>
+</div>
+
+<div class="recap-container">
+    <div class="recap-content">
+        <div class="recap-header">
+            <h3>📋 Rekapan Data Pelanggan</h3>
+            <div class="recap-action-buttons">
+                <button class="scroll-btn" style="width: auto; padding: 4px 10px; background: #10b981; border: none; color: white; font-weight: bold;" onclick="exportRecapToExcelXML()">Cetak Excel</button>
+            </div>
+        </div>
+        
+        <div class="recap-list" id="recapListContainer"></div>
+
+        <div class="security-section">
+            <button class="scroll-btn" style="width: 48%; background: #3b82f6; border: none; color: white;" onclick="backupDatabaseToJSON()">Backup Data</button>
+            <button class="scroll-btn" style="width: 48%; background: #a855f7; border: none; color: white;" onclick="triggerImportFileInput()">Import Data</button>
+            <input type="file" id="importFileSource" class="hidden-file-input" accept=".json" onchange="importDatabaseFromJSON(this)">
+        </div>
+        <div style="text-align: right; margin-top: 8px;">
+            <button class="scroll-btn" style="width: auto; padding: 2px 8px; display: inline-block;" onclick="clearAllRecapRecords()">Hapus Semua Riwayat</button>
+        </div>
+    </div>
 </div>
 
 <script>
+    let currentThemeHex = "#FF5A79";
+
+    // Dataset Layanan Medis
     const medicalServicesDataset = {
         "IBU": [
             { name: "Massage Ibu Hamil", price: 80000 },
@@ -456,9 +502,12 @@
         }
     }
 
-    function changeUITheme(primaryColor, glowColor) {
+    function changeUITheme(primaryColor, glowColor, element) {
+        currentThemeHex = primaryColor;
         document.documentElement.style.setProperty('--theme-color', primaryColor);
         document.documentElement.style.setProperty('--theme-glow', glowColor);
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        element.classList.add('active');
     }
 
     function toggleUIVisualMode() {
@@ -477,15 +526,17 @@
         
         let isFirst = true;
         for (const category in medicalServicesDataset) {
+            const categoryId = category.replace(/[^a-zA-Z0-9]/g, '-');
+            
             const tabBtn = document.createElement('button');
             tabBtn.className = `tab-btn ${isFirst ? 'active' : ''}`;
             tabBtn.innerText = category;
-            tabBtn.onclick = () => switchCategoryTab(category, tabBtn);
+            tabBtn.onclick = () => switchCategoryTab(categoryId, tabBtn);
             tabsContainer.appendChild(tabBtn);
 
             const pane = document.createElement('div');
             pane.className = `menu-pane ${isFirst ? 'active' : ''}`;
-            pane.id = `pane-${category.replace(/\s+/g, '-')}`;
+            pane.id = `pane-${categoryId}`;
 
             medicalServicesDataset[category].forEach(srv => {
                 const item = document.createElement('div');
@@ -512,13 +563,14 @@
             serviceContainer.appendChild(pane);
             isFirst = false;
         }
+        loadRecapRecords();
     }
 
-    function switchCategoryTab(category, btn) {
+    function switchCategoryTab(categoryId, btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         document.querySelectorAll('.menu-pane').forEach(p => p.classList.remove('active'));
-        document.getElementById(`pane-${category.replace(/\s+/g, '-')}`).classList.add('active');
+        document.getElementById(`pane-${categoryId}`).classList.add('active');
     }
 
     function toggleServiceSelection(service, category, checkbox, itemElement) {
@@ -541,6 +593,266 @@
         document.getElementById('liveTotalDisplay').innerText = `Rp ${total.toLocaleString('id-ID')}`;
     }
 
+    // --- REKAPAN DATA (LocalStorage) ---
+    function saveCustomerToRecap() {
+        const nama = document.getElementById('namaPasien').value.trim();
+        const telp = document.getElementById('nomorHp').value.trim();
+        const diskon = parseInt(document.getElementById('diskonHarga').value) || 0;
+        
+        if (!nama) {
+            alert("Silakan masukkan Nama Pelanggan terlebih dahulu.");
+            return;
+        }
+        if (selectedServices.length === 0) {
+            alert("Silakan pilih minimal satu layanan treatment.");
+            return;
+        }
+
+        let totalLayanan = selectedServices.reduce((sum, s) => sum + s.price, 0);
+        let totalAkhir = Math.max(0, totalLayanan - diskon);
+        const daftarLayananText = selectedServices.map(s => s.name).join(", ");
+
+        const recordBaru = {
+            id: Date.now(),
+            nama: nama,
+            telp: telp || "-",
+            layanan: daftarLayananText,
+            total: totalAkhir,
+            tanggal: new Date().toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' })
+        };
+
+        let dataRekap = localStorage.getItem("adzkiya_recap_data");
+        dataRekap = dataRekap ? JSON.parse(dataRekap) : [];
+        dataRekap.unshift(recordBaru);
+        localStorage.setItem("adzkiya_recap_data", JSON.stringify(dataRekap));
+
+        loadRecapRecords();
+        resetMainInputForm();
+        alert("Data pelanggan berhasil disimpan secara permanen!");
+    }
+
+    function loadRecapRecords() {
+        const container = document.getElementById("recapListContainer");
+        container.innerHTML = "";
+        
+        let dataRekap = localStorage.getItem("adzkiya_recap_data");
+        dataRekap = dataRekap ? JSON.parse(dataRekap) : [];
+
+        if (dataRekap.length === 0) {
+            container.innerHTML = `<div style="text-align:center; font-size:12px; color:var(--text-sub); padding:15px; opacity:0.7;">Belum ada data rekapan tersimpan.</div>`;
+            return;
+        }
+
+        dataRekap.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "recap-item";
+            card.innerHTML = `
+                <button class="btn-delete" onclick="deleteRecapItem(${item.id})">✕</button>
+                <div class="name">${item.nama} <span style="font-weight:normal; font-size:10px; color:var(--text-sub);">(${item.tanggal})</span></div>
+                <div class="details">📞 Telp: ${item.telp}</div>
+                <div class="details">💆 Treatment: ${item.layanan}</div>
+                <div class="price">Rp ${item.total.toLocaleString('id-ID')}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function deleteRecapItem(id) {
+        if(confirm("Hapus item data rekapan ini?")) {
+            let dataRekap = JSON.parse(localStorage.getItem("adzkiya_recap_data")) || [];
+            dataRekap = dataRekap.filter(item => item.id !== id);
+            localStorage.setItem("adzkiya_recap_data", JSON.stringify(dataRekap));
+            loadRecapRecords();
+        }
+    }
+
+    function clearAllRecapRecords() {
+        if(confirm("Apakah Anda yakin ingin menghapus TOTAL seluruh riwayat rekapan lokal?")) {
+            localStorage.removeItem("adzkiya_recap_data");
+            loadRecapRecords();
+        }
+    }
+
+    // --- CETAK EXCEL AUTO-FIT DENGAN FORMAT XML SPREADSHEET ---
+    function exportRecapToExcelXML() {
+        let dataRekap = localStorage.getItem("adzkiya_recap_data");
+        dataRekap = dataRekap ? JSON.parse(dataRekap) : [];
+
+        if (dataRekap.length === 0) {
+            alert("Tidak ada data rekapan yang bisa diekspor.");
+            return;
+        }
+
+        // Template XML untuk Excel agar lebar kolom otomatis pas & rapi (tanpa perlu edit geser kolom)
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:coordinates"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Center"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="sHeader">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#FF5A79" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="sData">
+   <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="sCurrency">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D1D5DB"/>
+   </Borders>
+   <NumberFormat ss:Format="&quot;Rp&quot;\ #,##0"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Rekapan Omset">
+  <Table ss:ExpandedColumnCount="5" ss:DefaultRowHeight="20">
+   <Column ss:Width="110"/> <Column ss:Width="140"/> <Column ss:Width="100"/> <Column ss:Width="260"/> <Column ss:Width="100"/> <Row ss:Height="26">
+    <Cell ss:StyleID="sHeader"><Data ss:Type="String">Tanggal &amp; Waktu</Data></Cell>
+    <Cell ss:StyleID="sHeader"><Data ss:Type="String">Nama Pelanggan</Data></Cell>
+    <Cell ss:StyleID="sHeader"><Data ss:Type="String">No HP / WhatsApp</Data></Cell>
+    <Cell ss:StyleID="sHeader"><Data ss:Type="String">Layanan Treatment</Data></Cell>
+    <Cell ss:StyleID="sHeader"><Data ss:Type="String">Total Bayar</Data></Cell>
+   </Row>`;
+
+        // Loop Baris Data
+        dataRekap.forEach(item => {
+            // Bersihkan teks khusus XML
+            let cleanLayanan = item.layanan.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let cleanNama = item.nama.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            
+            xml += `
+   <Row ss:AutoFitHeight="1">
+    <Cell ss:StyleID="sData"><Data ss:Type="String">${item.tanggal}</Data></Cell>
+    <Cell ss:StyleID="sData"><Data ss:Type="String">${cleanNama}</Data></Cell>
+    <Cell ss:StyleID="sData"><Data ss:Type="String">${item.telp}</Data></Cell>
+    <Cell ss:StyleID="sData"><Data ss:Type="String">${cleanLayanan}</Data></Cell>
+    <Cell ss:StyleID="sCurrency"><Data ss:Type="Number">${item.total}</Data></Cell>
+   </Row>`;
+        });
+
+        xml += `
+  </Table>
+ </Worksheet>
+</Workbook>`;
+
+        const blob = new Blob([xml], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `Rekapan_Adzkiya_${new Date().toLocaleDateString('id-ID').replace(/\//g, '-')}.xls`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // --- MODUL FITUR BACKUP & IMPORT DATABASE (MENGAMANKAN DATA) ---
+    function backupDatabaseToJSON() {
+        let dataRekap = localStorage.getItem("adzkiya_recap_data");
+        if (!dataRekap || JSON.parse(dataRekap).length === 0) {
+            alert("Tidak ada data rekapan yang bisa di-backup saat ini.");
+            return;
+        }
+
+        const blob = new Blob([dataRekap], { type: "application/json;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `BACKUP_REKAP_ADZKIYA_${Date.now()}.json`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function triggerImportFileInput() {
+        document.getElementById('importFileSource').click();
+    }
+
+    function importDatabaseFromJSON(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    if (!Array.isArray(importedData)) {
+                        throw new Error("Format database tidak valid.");
+                    }
+
+                    if (confirm(`Menemukan ${importedData.length} baris riwayat data rekapan. Gabungkan dengan data lokal saat ini?`)) {
+                        let localData = localStorage.getItem("adzkiya_recap_data");
+                        localData = localData ? JSON.parse(localData) : [];
+
+                        // Menghindari duplikasi id data
+                        let mergedData = [...importedData, ...localData];
+                        let uniqueData = [];
+                        let checkedIds = {};
+
+                        mergedData.forEach(item => {
+                            if (!checkedIds[item.id]) {
+                                uniqueData.push(item);
+                                checkedIds[item.id] = true;
+                            }
+                        });
+
+                        localStorage.setItem("adzkiya_recap_data", JSON.stringify(uniqueData));
+                        loadRecapRecords();
+                        alert("Database berhasil di-import dan disinkronisasikan!");
+                    }
+                } catch (err) {
+                    alert("Gagal membaca file backup. Pastikan file berupa berkas .json resmi dari aplikasi ini.");
+                }
+                // Reset file input agar bisa upload file yang sama jika diinginkan
+                input.value = "";
+            };
+            reader.readAsText(input.files[0]);
+        }
+    }
+
+    function resetMainInputForm() {
+        document.getElementById('namaPasien').value = "";
+        document.getElementById('nomorHp').value = "";
+        document.getElementById('diskonHarga').value = "0";
+        selectedServices = [];
+        document.querySelectorAll('#serviceContainer input[type="checkbox"]').forEach(chk => chk.checked = false);
+        document.querySelectorAll('.service-item').forEach(item => item.classList.remove('selected'));
+        calculateLiveTotalBill();
+    }
+
+    function hexToRgbArray(hex) {
+        let c = hex.substring(1);
+        if(c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+        let r = parseInt(c.substring(0,2), 16);
+        let g = parseInt(c.substring(2,4), 16);
+        let b = parseInt(c.substring(4,6), 16);
+        return [r, g, b];
+    }
+
+    // --- CETAK PDF KWITANSI CLEAN FORMAL ---
     function generatePremiumInvoicePDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('p', 'mm', 'a4');
@@ -559,87 +871,86 @@
         if (base64LogoDataStream) {
             doc.saveGraphicsState();
             doc.setGState(new doc.GState({ opacity: 0.04 }));
-            doc.addImage(base64LogoDataStream, 'PNG', 45, 95, 120, 120, undefined, 'FAST');
+            doc.addImage(base64LogoDataStream, 'PNG', 50, 95, 110, 110, undefined, 'FAST');
             doc.restoreGraphicsState();
         }
 
-        doc.setFillColor(248, 250, 252);
-        doc.rect(0, 0, 210, 48, "F");
-
-        let textLeftMargin = 15;
+        let rgbTheme = hexToRgbArray(currentThemeHex);
+        let textLeftMargin = 20;
         if (base64LogoDataStream) {
-            doc.addImage(base64LogoDataStream, 'PNG', 15, 8, 26, 26, undefined, 'FAST');
-            textLeftMargin = 46;
+            doc.addImage(base64LogoDataStream, 'PNG', 16, 16, 24, 24, undefined, 'FAST');
+            textLeftMargin = 45;
         }
 
-        doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(255, 90, 121);
-        doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 16);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(16); doc.setTextColor(rgbTheme[0], rgbTheme[1], rgbTheme[2]);
+        doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 23);
         
-        doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(100, 116, 139);
-        doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 22);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); doc.setTextColor(71, 85, 105);
+        doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 29);
 
-        doc.setFont("helvetica", "italic"); doc.setFontSize(8.5); doc.setTextColor(115, 115, 115);
-        doc.text("Dusun Klumprit Kulon No. 217 RT 1 RW 1 Klumprit, Nusawungu, Cilacap 53283", textLeftMargin, 27);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.5); doc.setTextColor(115, 115, 115);
+        doc.text("Dusun Klumprit Kulon No. 217 RT 1 RW 1 Klumprit, Nusawungu, Cilacap 53283", textLeftMargin, 35);
 
-        doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(51, 65, 85);
-        doc.text("KWITANSI PEMBAYARAN", 195, 16, { align: "right" });
-        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
-        doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 22, { align: "right" });
+        doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(30, 41, 59);
+        doc.text("KWITANSI ELEKTRONIK", 195, 23, { align: "right" });
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
+        doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 29, { align: "right" });
 
-        doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(71, 85, 105);
-        doc.text("INFORMASI PASIEN", 15, 58);
-        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(15, 60, 195, 60);
+        doc.setDrawColor(226, 232, 240);
+        doc.setLineWidth(0.4);
+        doc.line(15, 44, 195, 44);
 
-        doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
-        doc.text("Nama Pelanggan / Pasien", 15, 67);
-        doc.text("No. HP / WhatsApp", 15, 74);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(rgbTheme[0], rgbTheme[1], rgbTheme[2]);
+        doc.text("DETAIL KLIEN & PASIEN", 16, 52);
 
-        doc.text(":", 60, 67);
-        doc.text(":", 60, 74);
-
-        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
-        doc.text(namaPasien, 64, 67);
-        doc.text(nomorHp, 64, 74);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); doc.setTextColor(51, 65, 85);
+        doc.text(`Nama Lengkap :  ${namaPasien}`, 16, 60);
+        doc.text(`No. HP / WhatsApp :  ${nomorHp}`, 120, 60);
 
         doc.autoTable({
-            startY: 82,
+            startY: 68,
             head: [['No', 'Kategori Klien', 'Deskripsi Layanan Treatment', 'Harga Satuan']],
             body: selectedServices.map((s, idx) => [idx + 1, s.category, s.name, `Rp ${s.price.toLocaleString('id-ID')}`]),
             theme: 'striped',
-            headStyles: { fillColor: [255, 90, 121], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 10 },
-            bodyStyles: { textColor: [51, 65, 85], fontSize: 9.5 },
-            columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 42, fontStyle: 'bold' }, 3: { halign: 'right', cellWidth: 35 } },
-            margin: { left: 15, right: 15 }
+            headStyles: { fillOpacity: 1, fillColor: [rgbTheme[0], rgbTheme[1], rgbTheme[2]], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9.5, cellPadding: 4 },
+            bodyStyles: { textColor: [30, 41, 59], fontSize: 9.5, cellPadding: 4 },
+            columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 45 }, 3: { halign: 'right', cellWidth: 38 } },
+            margin: { left: 15, right: 15 },
+            tableLineColor: [226, 232, 240],
+            tableLineWidth: 0.3
         });
 
         let finalY = doc.lastAutoTable.finalY + 10;
-        if (finalY > 230) { doc.addPage(); finalY = 30; }
+        if (finalY > 230) { doc.addPage(); finalY = 25; }
 
-        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(110, finalY, 195, finalY);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
+        doc.text("Subtotal Treatment:", 115, finalY + 2);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Rp ${totalLayanan.toLocaleString('id-ID')}`, 194, finalY + 2, { align: "right" });
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Potongan Diskon:", 115, finalY + 8);
+        doc.setFont("helvetica", "normal");
+        doc.text(`- Rp ${diskon.toLocaleString('id-ID')}`, 194, finalY + 8, { align: "right" });
+
+        doc.setDrawColor(rgbTheme[0], rgbTheme[1], rgbTheme[2]);
+        doc.setLineWidth(0.3);
+        doc.line(115, finalY + 12, 195, finalY + 12);
+
+        doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(225, 29, 72);
+        doc.text("TOTAL BAYAR:", 115, finalY + 18);
+        doc.text(`Rp ${totalAkhirBayar.toLocaleString('id-ID')}`, 194, finalY + 18, { align: "right" });
+
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); doc.setTextColor(148, 163, 184);
+        doc.text("Terima kasih atas kunjungan & kepercayaan Anda.", 15, finalY + 18);
+
+        let signY = finalY + 42;
+        if (signY > 265) { doc.addPage(); signY = 30; }
 
         doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
-        doc.text("Subtotal Treatment:", 125, finalY + 7);
-        doc.text(`Rp ${totalLayanan.toLocaleString('id-ID')}`, 190, finalY + 7, { align: "right" });
-
-        doc.text("Potongan / Diskon:", 125, finalY + 13);
-        doc.text(`- Rp ${diskon.toLocaleString('id-ID')}`, 190, finalY + 13, { align: "right" });
-
-        doc.setFillColor(255, 241, 242);
-        doc.rect(120, finalY + 18, 75, 10, "F");
-        doc.setFont("helvetica", "bold"); doc.setTextColor(225, 29, 72);
-        doc.text("TOTAL BAYAR", 125, finalY + 24);
-        doc.text(`Rp ${totalAkhirBayar.toLocaleString('id-ID')}`, 190, finalY + 24, { align: "right" });
-
-        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
-        doc.text("Terima kasih atas kepercayaan Anda.", 15, finalY + 24);
-
-        let signY = finalY + 45;
-        if (signY > 265) { doc.addPage(); signY = 35; }
-
-        doc.setFont("helvetica", "normal"); doc.setTextColor(100, 116, 139);
         doc.text("Bidan Praktisi,", 155, signY, { align: "center" });
-        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
-        doc.text("Tasya Hanifah Pramesti, A.Md.Keb., CBME", 155, signY + 20, { align: "center" });
+        doc.setFont("helvetica", "bold"); doc.setFontSize(10.5); doc.setTextColor(30, 41, 59);
+        doc.text("Tasya Hanifah Pramesti, A.Md.Keb., CBME", 155, signY + 22, { align: "center" });
 
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         if (isIOS) {
@@ -648,10 +959,10 @@
             if (newWindow) {
                 newWindow.document.write(`<iframe src="${pdfBase64}" style="width:100%; height:100%; border:none;"></iframe>`);
             } else {
-                doc.save(`Kwitansi_Adzkiya_${namaPasien.replace(/\s+/g, '_')}.pdf`);
+                doc.save(`Kwitansi_${namaPasien.replace(/\s+/g, '_')}.pdf`);
             }
         } else {
-            doc.save(`Kwitansi_Adzkiya_${namaPasien.replace(/\s+/g, '_')}.pdf`);
+            doc.save(`Kwitansi_${namaPasien.replace(/\s+/g, '_')}.pdf`);
         }
     }
 
