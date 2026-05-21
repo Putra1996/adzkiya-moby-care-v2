@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Adzkiya Mom Baby Care - Premium Logo Edition</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Pengaturan Dasar Premium Modern UI */
+        * { box-sizing: border-box; font-family: '-apple-system', BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        :root {
+            --theme-color: #FF748C; 
+            --theme-glow: rgba(255, 116, 140, 0.15);
+            --bg-gradient: linear-gradient(160deg, #09070f 0%, #110e20 100%);
+            --card-bg: rgba(22, 19, 39, 0.7);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-sub: #8e8a9f;
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --item-hover: rgba(255, 255, 255, 0.05);
+            --item-border: rgba(255, 255, 255, 0.04);
+            --shadow-fluid: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.05);
+            --tab-bg: rgba(255, 255, 255, 0.04);
+            --watermark-opacity: 0.04;
+        }
+
+        body.light-mode {
+            --bg-gradient: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(0, 0, 0, 0.04);
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --input-bg: rgba(0, 0, 0, 0.02);
+            --item-hover: rgba(0, 0, 0, 0.02);
+            --item-border: rgba(0, 0, 0, 0.03);
+            --shadow-fluid: 0 30px 60px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            --tab-bg: rgba(0, 0, 0, 0.03);
+            --watermark-opacity: 0.06;
+        }
+
+        body { 
+            background: var(--bg-gradient); 
+            min-height: 100vh;
+            padding: calc(40px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom)) 20px; 
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.5s ease;
+        }
+
+        .container { 
+            position: relative; 
+            background: var(--card-bg); 
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px; 
+            padding: 35px 30px; 
+            box-shadow: var(--shadow-fluid);
+            width: 100%;
+            max-width: 440px; 
+            transition: background 0.4s ease, border 0.4s ease;
+            overflow: hidden;
+        }
+
+        .ui-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px; 
+            height: 280px;
+            object-fit: contain;
+            opacity: var(--watermark-opacity);
+            pointer-events: none; 
+            z-index: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .brand-section, .color-palette, .form-group, .live-total-panel, .btn-block {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        h2 { 
+            font-size: 20px; 
+            font-weight: 800; 
+            letter-spacing: -0.3px;
+        }
+        
+        h2 .accent-part { color: var(--theme-color); transition: color 0.3s ease; }
+        h2 .neutral-part { color: var(--text-main); margin-left: 5px; font-weight: 400; opacity: 0.9; transition: color 0.3s ease; }
+
+        .mode-toggle {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 16px;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .mode-toggle:hover { transform: scale(1.05); }
+
+        .color-palette {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            background: var(--input-bg);
+            padding: 6px;
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+        }
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .color-dot:hover, .color-dot.active { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .color-dot.active { border-color: var(--text-main); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            font-size: 11px; 
+            color: var(--text-sub); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px;
+        }
+        
+        input[type="text"], input[type="tel"], input[type="number"], input[type="file"] { 
+            width: 100%; 
+            padding: 15px 16px; 
+            background: var(--input-bg);
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
+            font-size: 14px; 
+            color: var(--text-main);
+            outline: none; 
+            -webkit-appearance: none;
+            transition: all 0.3s ease;
+        }
+        input[type="file"] {
+            padding: 12px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        input:focus { 
+            border-color: var(--theme-color); 
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px var(--theme-glow);
+        }
+        body.light-mode input:focus { background: #ffffff; box-shadow: 0 0 0 4px var(--theme-glow); }
+
+        .category-tabs {
+            display: flex;
+            background: var(--tab-bg);
+            padding: 4px;
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: 4px;
+        }
+        .category-tabs::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        
+        .tab-btn {
+            flex: 0 0 auto;
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 10px 14px;
+            font-size: 10.5px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background: var(--theme-color);
+            color: white;
+            box-shadow: 0 4px 12px var(--theme-glow);
+        }
+
+        .scroll-wrapper { position: relative; width: 100%; }
+        .service-list { 
+            max-height: 180px; 
+            overflow-y: auto; 
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px; 
+            padding: 4px 0;
+            padding-right: 45px; 
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; 
+            overscroll-behavior: contain;
+        }
+        .service-list::-webkit-scrollbar { width: 0px; display: none; } 
+        .menu-pane { display: none; }
+        .menu-pane.active { display: block; }
+
+        .scroll-navigation-panel {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 10;
+        }
+        .scroll-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            color: var(--text-sub);
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        body.light-mode .scroll-btn { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0, 0, 0, 0.01); }
+        .scroll-btn:hover { background: var(--theme-color); color: white; }
+
+        .service-item { 
+            display: flex; 
+            align-items: center; 
+            padding: 13px 16px; 
+            border-bottom: 1px solid var(--item-border); 
+            cursor: pointer;
+            transition: background 0.2s ease;
+            width: 100%;
+        }
+        .service-item:hover, .service-item.selected { background: var(--item-hover); }
+        .service-item:last-child { border-bottom: none; }
+        
+        input[type="checkbox"] { 
+            width: 18px; 
+            height: 18px; 
+            margin-right: 14px; 
+            accent-color: var(--theme-color); 
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .service-item span { font-size: 13px; font-weight: 500; color: var(--text-main); line-height: 1.4; }
+
+        .live-total-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 22px 0 20px 0;
+            padding: 0 4px;
+        }
+        .live-total-label { font-size: 11px; color: var(--text-sub); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .live-total-value { font-size: 22px; font-weight: 800; color: var(--theme-color); letter-spacing: -0.5px; }
+
+        button.btn-block { 
+            width: 100%; 
+            background: var(--theme-color);
+            color: white; 
+            border: none;
+            padding: 16px; 
+            font-size: 15px; 
+            font-weight: 700; 
+            border-radius: 16px; 
+            cursor: pointer; 
+            transition: opacity 0.2s, transform 0.1s; 
+            box-shadow: 0 10px 25px var(--theme-glow);
+        }
+        button.btn-block:hover { opacity: 0.92; }
+        button.btn-block:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img class="ui-watermark" id="uiWatermarkView" src="" alt="" style="display: none;">
+
+    <div class="brand-section">
+        <h2><span class="accent-part">Adzkiya</span><span class="neutral-part">Mom Baby Care</span></h2>
+        <button class="mode-toggle" onclick="toggleUIVisualMode()" aria-label="Toggle Theme">🌓</button>
+    </div>
+
+    <div class="color-palette">
+        <div class="color-dot active" style="background: #FF748C;" onclick="changeUITheme('#FF748C', 'rgba(255, 116, 140, 0.15)')"></div>
+        <div class="color-dot" style="background: #2DD4BF;" onclick="changeUITheme('#2DD4BF', 'rgba(45, 212, 191, 0.15)')"></div>
+        <div class="color-dot" style="background: #3B82F6;" onclick="changeUITheme('#3B82F6', 'rgba(59, 130, 246, 0.15)')"></div>
+        <div class="color-dot" style="background: #A855F7;" onclick="changeUITheme('#A855F7', 'rgba(168, 85, 247, 0.15)')"></div>
+        <div class="color-dot" style="background: #F59E0B;" onclick="changeUITheme('#F59E0B', 'rgba(245, 158, 11, 0.15)')"></div>
+    </div>
+
+    <div class="form-group">
+        <label>Upload Logo Klinik / Praktik</label>
+        <input type="file" id="logoUploader" accept="image/png, image/jpeg, image/jpg" onchange="processLogoImageFile(this)">
+    </div>
+
+    <div class="form-group">
+        <label>Nama Pelanggan / Pasien</label>
+        <input type="text" id="namaPasien" placeholder="Masukkan nama lengkap">
+    </div>
+
+    <div class="form-group">
+        <label>Nomor HP / WhatsApp</label>
+        <input type="tel" id="nomorHp" placeholder="Contoh: 081234567xxx">
+    </div>
+
+    <div class="form-group">
+        <label>Potongan Diskon (Rp)</label>
+        <input type="number" id="diskonHarga" placeholder="0" value="0" oninput="calculateLiveTotalBill()">
+    </div>
+
+    <div class="form-group">
+        <label>Kategori & Layanan Treatment</label>
+        <div class="category-tabs" id="categoryTabsLayout"></div>
+        
+        <div class="scroll-wrapper">
+            <div class="service-list" id="serviceContainer"></div>
+            <div class="scroll-navigation-panel">
+                <button class="scroll-btn" onclick="scrollServiceList('up')">▲</button>
+                <button class="scroll-btn" onclick="scrollServiceList('down')">▼</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="live-total-panel">
+        <span class="live-total-label">Total Pembayaran</span>
+        <span class="live-total-value" id="liveTotalDisplay">Rp 0</span>
+    </div>
+
+    <button class="btn-block" onclick="generatePremiumInvoicePDF()">Cetak PDF Kwitansi</button>
+</div>
+
+<script>
+    // Database Medis Asli Anda
+    const medicalServicesDataset = {
+        "IBU": [
+            { name: "Massage Ibu Hamil", price: 80000 },
+            { name: "Massage Ibu Nifas", price: 80000 },
+            { name: "Massage Laktasi", price: 80000 },
+            { name: "Massage Induksi", price: 80000 },
+            { name: "Harmony Spa", price: 105000 },
+            { name: "Blooming Spa", price: 115000 },
+            { name: "Serenity Bump Package", price: 115000 },
+            { name: "Blooming Mama Package", price: 125000 },
+            { name: "Adzkiya Glow Package", price: 135000 },
+            { name: "Perawatan Luka Perineum", price: 100000 },
+            { name: "Perawatan Luka Post Sc", price: 120000 }
+        ],
+        "BAYI 0-12 BULAN": [
+            { name: "Sleepwell Massage", price: 50000 },
+            { name: "Pijat Bapil", price: 60000 },
+            { name: "Pijat Diare", price: 60000 },
+            { name: "Pijat Sembelit", price: 60000 },
+            { name: "Pijat Tuina", price: 60000 },
+            { name: "Therapy Bapil", price: 80000 },
+            { name: "Baby Haircut", price: 25000 },
+            { name: "Newborn Care 3 Days", price: 255000 },
+            { name: "Newborn Care 5 Days", price: 425000 }
+        ],
+        "ANAK (KIDS)": [
+            { name: "Sleepwell Massage (1-3 Th)", price: 50000 },
+            { name: "Sleepwell Massage (4-5 Th)", price: 50000 },
+            { name: "Pijat Bapil (Kids)", price: 60000 },
+            { name: "Therapy Bapil (Kids)", price: 85000 }
+        ],
+        "MOM AND NEW BORN": [
+            { name: "Mom & Newborn Care 5 Days", price: 550000 },
+            { name: "Mom & Newborn Care 7 Days", price: 750000 }
+        ]
+    };
+
+    let selectedServices = [];
+    let base64LogoDataStream = ""; // Penyimpanan Data URI Logo
+
+    // Mengubah file gambar yang diupload ke Base64 secara instan
+    function processLogoImageFile(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                base64LogoDataStream = e.target.result;
+                
+                // Tampilkan di UI utama sebagai watermark dinamis
+                const uiWatermark = document.getElementById('uiWatermarkView');
+                uiWatermark.src = base64LogoDataStream;
+                uiWatermark.style.display = "block";
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function changeUITheme(primaryColor, glowColor) {
+        document.documentElement.style.setProperty('--theme-color', primaryColor);
+        document.documentElement.style.setProperty('--theme-glow', glowColor);
+        document.querySelectorAll('.color-dot').forEach(dot => {
+            if (dot.style.backgroundColor === hexToRgb(primaryColor) || dot.style.backgroundColor === primaryColor) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function hexToRgb(hex) {
+        const rgb = parseInt(hex.replace('#', ''), 16);
+        const r = (rgb >> 16) & 255;
+        const g = (rgb >> 8) & 255;
+        const b = rgb & 255;
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function toggleUIVisualMode() {
+        document.body.classList.toggle('light-mode');
+    }
+
+    function scrollServiceList(direction) {
+        const container = document.getElementById('serviceContainer');
+        if (direction === 'up') container.scrollBy({ top: -50, behavior: 'smooth' });
+        else container.scrollBy({ top: 50, behavior: 'smooth' });
+    }
+
+    function initializeAppCore() {
+        const tabsContainer = document.getElementById('categoryTabsLayout');
+        const serviceContainer = document.getElementById('serviceContainer');
+        
+        let isFirst = true;
+        for (const category in medicalServicesDataset) {
+            const tabBtn = document.createElement('button');
+            tabBtn.className = `tab-btn ${isFirst ? 'active' : ''}`;
+            tabBtn.innerText = category;
+            tabBtn.onclick = () => switchCategoryTab(category, tabBtn);
+            tabsContainer.appendChild(tabBtn);
+
+            const pane = document.createElement('div');
+            pane.className = `menu-pane ${isFirst ? 'active' : ''}`;
+            pane.id = `pane-${category.replace(/\s+/g, '-')}`;
+
+            medicalServicesDataset[category].forEach(srv => {
+                const item = document.createElement('div');
+                item.className = 'service-item';
+                
+                const chk = document.createElement('input');
+                chk.type = 'checkbox';
+                chk.onchange = () => toggleServiceSelection(srv, category, chk, item);
+
+                const label = document.createElement('span');
+                label.innerText = `${srv.name} (Rp ${srv.price.toLocaleString('id-ID')})`;
+
+                item.appendChild(chk);
+                item.appendChild(label);
+                item.onclick = (e) => {
+                    if (e.target !== chk) {
+                        chk.checked = !chk.checked;
+                        toggleServiceSelection(srv, category, chk, item);
+                    }
+                };
+                pane.appendChild(item);
+            });
+
+            serviceContainer.appendChild(pane);
+            isFirst = false;
+        }
+    }
+
+    function switchCategoryTab(category, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.menu-pane').forEach(p => p.classList.remove('active'));
+        document.getElementById(`pane-${category.replace(/\s+/g, '-')}`).classList.add('active');
+    }
+
+    function toggleServiceSelection(service, category, checkbox, itemElement) {
+        if (checkbox.checked) {
+            itemElement.classList.add('selected');
+            if (!selectedServices.some(s => s.name === service.name)) {
+                selectedServices.push({ ...service, category: category });
+            }
+        } else {
+            itemElement.classList.remove('selected');
+            selectedServices = selectedServices.filter(s => s.name !== service.name);
+        }
+        calculateLiveTotalBill();
+    }
+
+    function calculateLiveTotalBill() {
+        let total = selectedServices.reduce((sum, s) => sum + s.price, 0);
+        const diskon = parseInt(document.getElementById('diskonHarga').value) || 0;
+        total = Math.max(0, total - diskon);
+        document.getElementById('liveTotalDisplay').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    function generatePremiumInvoicePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+
+        const namaPasien = document.getElementById('namaPasien').value.trim() || "-";
+        const nomorHp = document.getElementById('nomorHp').value.trim() || "-";
+        const diskon = parseInt(document.getElementById('diskonHarga').value) || 0;
+        let totalLayanan = selectedServices.reduce((sum, s) => sum + s.price, 0);
+        let totalAkhirBayar = Math.max(0, totalLayanan - diskon);
+
+        if (selectedServices.length === 0) {
+            alert("Silakan pilih minimal satu layanan treatment terlebih dahulu.");
+            return;
+        }
+
+        // 1. WATERMARK: Gambar latar belakang transparan (jika logo diupload)
+        if (base64LogoDataStream) {
+            doc.saveGraphicsState();
+            doc.setGState(new doc.GState({ opacity: 0.04 })); // Sangat transparan agar teks terbaca
+            doc.addImage(base64LogoDataStream, 'PNG', 45, 85, 120, 120, undefined, 'FAST');
+            doc.restoreGraphicsState();
+        }
+
+        // Desain Header Top Banner Background
+        doc.setFillColor(248, 250, 252);
+        doc.rect(0, 0, 210, 42, "F");
+
+        // 2. HEADER LOGO: Memasukkan Logo Utama Aktif di Kiri Atas
+        let textLeftMargin = 15;
+        if (base64LogoDataStream) {
+            doc.addImage(base64LogoDataStream, 'PNG', 15, 8, 24, 24, undefined, 'FAST');
+            textLeftMargin = 44; // Beri ruang geser tulisan agar tidak menabrak logo
+        }
+
+        // Judul Klinik / Brand Utama
+        doc.setFont("helvetica", "bold"); doc.setFontSize(20); doc.setTextColor(255, 116, 140);
+        doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 20);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(100, 116, 139);
+        doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 26);
+
+        // Header Sisi Kanan (Metadata Kwitansi)
+        doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(51, 65, 85);
+        doc.text("KWITANSI PEMBAYARAN", 195, 20, { align: "right" });
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
+        doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 26, { align: "right" });
+
+        // Informasi Pelanggan
+        doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(71, 85, 105);
+        doc.text("INFORMASI PELANGGAN", 15, 54);
+        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(15, 56, 195, 56);
+
+        doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
+        doc.text("Nama Pelanggan :", 15, 64);
+        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
+        doc.text(namaPasien, 50, 64);
+
+        doc.setFont("helvetica", "normal"); doc.setTextColor(100, 116, 139);
+        doc.text("No. HP / WhatsApp :", 15, 70);
+        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
+        doc.text(nomorHp, 50, 70);
+
+        // Tabel Rincian Perawatan Terpilih
+        doc.autoTable({
+            startY: 78,
+            head: [['No', 'Kategori Klien', 'Deskripsi Layanan Treatment', 'Harga Satuan']],
+            body: selectedServices.map((s, idx) => [idx + 1, s.category, s.name, `Rp ${s.price.toLocaleString('id-ID')}`]),
+            theme: 'striped',
+            headStyles: { fillColor: [255, 116, 140], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 10 },
+            bodyStyles: { textColor: [51, 65, 85], fontSize: 9.5 },
+            columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 40, fontStyle: 'bold' }, 3: { halign: 'right', cellWidth: 35 } },
+            margin: { left: 15, right: 15 }
+        });
+
+        let finalY = doc.lastAutoTable.finalY + 10;
+        if (finalY > 230) { doc.addPage(); finalY = 30; }
+
+        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(110, finalY, 195, finalY);
+
+        doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
+        doc.text("Subtotal Treatment:", 125, finalY + 7);
+        doc.text(`Rp ${totalLayanan.toLocaleString('id-ID')}`, 190, finalY + 7, { align: "right" });
+
+        doc.text("Potongan / Diskon:", 125, finalY + 13);
+        doc.text(`- Rp ${diskon.toLocaleString('id-ID')}`, 190, finalY + 13, { align: "right" });
+
+        // Komponen Total Pembayaran Utama
+        doc.setFillColor(255, 241, 242);
+        doc.rect(120, finalY + 18, 75, 10, "F");
+        doc.setFont("helvetica", "bold"); doc.setTextColor(225, 29, 72);
+        doc.text("TOTAL BAYAR", 125, finalY + 24);
+        doc.text(`Rp ${totalAkhirBayar.toLocaleString('id-ID')}`, 190, finalY + 24, { align: "right" });
+
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
+        doc.text("Terima kasih atas kepercayaan Anda.", 15, finalY + 24);
+
+        // Bagian Tanda Tangan Praktisi
+        let signY = finalY + 45;
+        if (signY > 265) { doc.addPage(); signY = 35; }
+
+        doc.setFont("helvetica", "normal"); doc.setTextColor(100, 116, 139);
+        doc.text("Bidan Praktisi,", 155, signY, { align: "center" });
+        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
+        doc.text("Tasya Hanifah Pramesti, A.Md.Keb., CBME", 155, signY + 20, { align: "center" });
+
+        // Ekspor PDF Kompatibilitas Tinggi Cross-Platform
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (isIOS) {
+            const pdfBase64 = doc.output('datauristring');
+            const newWindow = window.open();
+            if (newWindow) {
+                newWindow.document.write(`<iframe src="${pdfBase64}" style="width:100%; height:100%; border:none;"></iframe>`);
+            } else {
+                doc.save(`Kwitansi_Adzkiya_${namaPasien.replace(/\s+/g, '_')}.pdf`);
+            }
+        } else {
+            doc.save(`Kwitansi_Adzkiya_${namaPasien.replace(/\s+/g, '_')}.pdf`);
+        }
+    }
+
+    window.onload = initializeAppCore;
+</script>
+</body>
+</html>
