@@ -3,41 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Adzkiya Mom Baby Care - Premium Edition</title>
+    <title>Adzkiya Mom Baby Care - iOS Liquid Glass Ultra Clear</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* Pengaturan Dasar Premium Modern UI */
-        * { box-sizing: border-box; font-family: '-apple-system', BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        /* --- iOS Liquid Glass UI Theme - Ultra Clear Font Fix --- */
+        * { 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         
         :root {
-            --theme-color: #FF748C; 
-            --theme-glow: rgba(255, 116, 140, 0.15);
-            --bg-gradient: linear-gradient(160deg, #09070f 0%, #110e20 100%);
-            --card-bg: rgba(22, 19, 39, 0.7);
-            --card-border: rgba(255, 255, 255, 0.05);
-            --text-main: #ffffff;
-            --text-sub: #8e8a9f;
-            --input-bg: rgba(255, 255, 255, 0.03);
-            --item-hover: rgba(255, 255, 255, 0.05);
-            --item-border: rgba(255, 255, 255, 0.04);
-            --shadow-fluid: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.05);
-            --tab-bg: rgba(255, 255, 255, 0.04);
-            --watermark-opacity: 0.04;
+            --theme-color: #FF5A79; /* Sedikit lebih pekat agar kontras */
+            --theme-glow: rgba(255, 90, 121, 0.35);
+            --bg-gradient: linear-gradient(135deg, #090615 0%, #0f0b21 40%, #20091b 80%, #0b081d 100%);
+            --card-bg: rgba(20, 16, 36, 0.8); /* Dipergelap agar teks putih makin menyala */
+            --card-border: rgba(255, 255, 255, 0.18);
+            --text-main: #FFFFFF; /* Putih solid murni */
+            --text-sub: #E2E8F0;  /* Diubah dari transparan ke abu-abu terang solid agar super jelas */
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(255, 255, 255, 0.25); /* Garis border dipertegas */
+            --item-hover: rgba(255, 255, 255, 0.12);
+            --item-border: rgba(255, 255, 255, 0.15);
+            --shadow-fluid: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            --tab-bg: rgba(255, 255, 255, 0.06);
+            --watermark-opacity: 0.05;
+            --glass-blur: blur(30px);
         }
 
         body.light-mode {
-            --bg-gradient: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 100%);
-            --card-bg: rgba(255, 255, 255, 0.75);
-            --card-border: rgba(0, 0, 0, 0.04);
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --input-bg: rgba(0, 0, 0, 0.02);
-            --item-hover: rgba(0, 0, 0, 0.02);
-            --item-border: rgba(0, 0, 0, 0.03);
-            --shadow-fluid: 0 30px 60px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            --tab-bg: rgba(0, 0, 0, 0.03);
-            --watermark-opacity: 0.06;
+            --bg-gradient: linear-gradient(135deg, #e6edf5 0%, #d5e0eb 40%, #fbcfe8 80%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.85); /* Dipertebal agar tidak silau */
+            --card-border: rgba(0, 0, 0, 0.15);
+            --text-main: #111827; /* Hitam pekat pekat */
+            --text-sub: #374151;  /* Abu-abu gelap solid sangat terbaca */
+            --input-bg: rgba(0, 0, 0, 0.04);
+            --input-border: rgba(0, 0, 0, 0.2); /* Border input lebih kelihatan */
+            --item-hover: rgba(0, 0, 0, 0.05);
+            --item-border: rgba(0, 0, 0, 0.08);
+            --shadow-fluid: 0 40px 80px rgba(15, 23, 42, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            --tab-bg: rgba(0, 0, 0, 0.05);
+            --watermark-opacity: 0.08;
         }
 
         body { 
@@ -49,20 +58,36 @@
             align-items: center;
             justify-content: center;
             transition: background 0.5s ease;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+        body::before { top: 10%; left: -60px; background: var(--theme-color); }
+        body::after { bottom: 10%; right: -60px; background: #2563eb; }
 
         .container { 
             position: relative; 
             background: var(--card-bg); 
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--card-border);
             border-radius: 32px; 
-            padding: 35px 30px; 
+            padding: 35px 28px; 
             box-shadow: var(--shadow-fluid);
             width: 100%;
-            max-width: 440px; 
-            transition: background 0.4s ease, border 0.4s ease;
+            max-width: 430px; 
+            transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
             overflow: hidden;
         }
 
@@ -93,13 +118,12 @@
         }
 
         h2 { 
-            font-size: 20px; 
-            font-weight: 800; 
-            letter-spacing: -0.3px;
+            font-size: 22px; 
+            font-weight: 800; /* Dibuat ultra tebal */
+            letter-spacing: -0.5px;
         }
-        
         h2 .accent-part { color: var(--theme-color); transition: color 0.3s ease; }
-        h2 .neutral-part { color: var(--text-main); margin-left: 5px; font-weight: 400; opacity: 0.9; transition: color 0.3s ease; }
+        h2 .neutral-part { color: var(--text-main); margin-left: 4px; font-weight: 700; transition: color 0.3s ease; }
 
         .mode-toggle {
             background: var(--input-bg);
@@ -107,15 +131,17 @@
             color: var(--text-main);
             cursor: pointer;
             font-size: 16px;
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .mode-toggle:hover { transform: scale(1.05); }
+        .mode-toggle:hover { transform: scale(1.05); background: var(--item-hover); }
 
         .color-palette {
             display: flex;
@@ -123,103 +149,108 @@
             margin-bottom: 25px;
             background: var(--input-bg);
             padding: 6px;
-            border-radius: 14px;
-            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            border: 1px solid var(--input-border);
         }
         .color-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 11px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.2s ease;
         }
-        .color-dot:hover, .color-dot.active { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .color-dot.active { border-color: var(--text-main); }
+        .color-dot:hover, .color-dot.active { transform: scale(1.12); }
+        .color-dot.active { border-color: var(--text-main); box-shadow: 0 0 10px var(--theme-glow); }
 
         .form-group { margin-bottom: 20px; }
         .form-group label { 
             display: block; 
             margin-bottom: 8px; 
-            font-weight: 600; 
-            font-size: 11px; 
+            font-weight: 700; /* Label dipertebal */
+            font-size: 12.5px; 
             color: var(--text-sub); 
-            text-transform: uppercase; 
-            letter-spacing: 0.8px;
+            letter-spacing: 0.3px;
         }
         
         input[type="text"], input[type="tel"], input[type="number"], input[type="file"] { 
             width: 100%; 
-            padding: 15px 16px; 
+            padding: 14px 16px; 
             background: var(--input-bg);
-            border: 1px solid var(--card-border); 
+            border: 1px solid var(--input-border); 
             border-radius: 16px; 
-            font-size: 14px; 
+            font-size: 15px; 
+            font-weight: 600; /* Tulisan di dalam input dipertebal */
             color: var(--text-main);
             outline: none; 
             -webkit-appearance: none;
             transition: all 0.3s ease;
         }
+        input::placeholder {
+            color: var(--text-sub);
+            opacity: 0.6;
+        }
         input[type="file"] {
-            padding: 12px;
-            font-size: 12px;
+            padding: 11px;
+            font-size: 13px;
             cursor: pointer;
         }
         input:focus { 
             border-color: var(--theme-color); 
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 0 4px var(--theme-glow);
         }
-        body.light-mode input:focus { background: #ffffff; box-shadow: 0 0 0 4px var(--theme-glow); }
+        body.light-mode input:focus { background: #FFFFFF; border-color: var(--theme-color); }
 
         .category-tabs {
             display: flex;
             background: var(--tab-bg);
-            padding: 4px;
+            padding: 5px;
             border-radius: 14px;
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--input-border);
             margin-bottom: 12px;
             overflow-x: auto;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            gap: 4px;
+            gap: 6px;
         }
-        .category-tabs::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        .category-tabs::-webkit-scrollbar { display: none; }
         
         .tab-btn {
             flex: 0 0 auto;
             background: transparent;
             border: none;
             color: var(--text-sub);
-            padding: 10px 14px;
-            font-size: 10.5px;
-            font-weight: 700;
-            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 11.5px;
+            font-weight: 700; /* Menu tab teks tebal */
+            border-radius: 11px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             text-align: center;
             white-space: nowrap;
         }
         .tab-btn.active {
-            background: var(--theme-color);
-            color: white;
-            box-shadow: 0 4px 12px var(--theme-glow);
+            background: var(--text-main);
+            color: var(--body-bg, #110e20);
+        }
+        body.light-mode .tab-btn.active {
+            background: #111827;
+            color: #FFFFFF;
         }
 
         .scroll-wrapper { position: relative; width: 100%; }
         .service-list { 
-            max-height: 180px; 
+            max-height: 190px; 
             overflow-y: auto; 
             background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px; 
+            border: 1px solid var(--input-border);
+            border-radius: 18px; 
             padding: 4px 0;
             padding-right: 45px; 
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; 
             overscroll-behavior: contain;
         }
-        .service-list::-webkit-scrollbar { width: 0px; display: none; } 
+        .service-list::-webkit-scrollbar { display: none; } 
         .menu-pane { display: none; }
         .menu-pane.active { display: block; }
 
@@ -234,68 +265,81 @@
             z-index: 10;
         }
         .scroll-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            color: var(--text-sub);
-            width: 26px;
-            height: 26px;
-            border-radius: 8px;
-            font-size: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--input-border);
+            color: var(--text-main);
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
             transition: all 0.2s ease;
         }
-        body.light-mode .scroll-btn { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0, 0, 0, 0.01); }
+        body.light-mode .scroll-btn { background: rgba(0, 0, 0, 0.08); }
         .scroll-btn:hover { background: var(--theme-color); color: white; }
 
         .service-item { 
             display: flex; 
             align-items: center; 
-            padding: 13px 16px; 
+            padding: 14px 16px; 
             border-bottom: 1px solid var(--item-border); 
             cursor: pointer;
             transition: background 0.2s ease;
             width: 100%;
         }
-        .service-item:hover, .service-item.selected { background: var(--item-hover); }
+        .service-item:hover { background: var(--item-hover); }
+        .service-item.selected { background: rgba(255, 255, 255, 0.15); }
+        body.light-mode .service-item.selected { background: rgba(0, 0, 0, 0.06); }
         .service-item:last-child { border-bottom: none; }
         
         input[type="checkbox"] { 
-            width: 18px; 
-            height: 18px; 
+            width: 20px; 
+            height: 20px; 
             margin-right: 14px; 
             accent-color: var(--theme-color); 
             cursor: pointer;
             flex-shrink: 0;
         }
-        .service-item span { font-size: 13px; font-weight: 500; color: var(--text-main); line-height: 1.4; }
+        .service-item span { 
+            font-size: 14px; 
+            font-weight: 600; /* Nama treatment dibuat semi-bold agar jelas */
+            color: var(--text-main); 
+            line-height: 1.4; 
+        }
 
         .live-total-panel {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 22px 0 20px 0;
+            margin: 24px 0 20px 0;
             padding: 0 4px;
         }
-        .live-total-label { font-size: 11px; color: var(--text-sub); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
-        .live-total-value { font-size: 22px; font-weight: 800; color: var(--theme-color); letter-spacing: -0.5px; }
+        .live-total-label { font-size: 12px; color: var(--text-sub); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .live-total-value { font-size: 26px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
 
         button.btn-block { 
             width: 100%; 
-            background: var(--theme-color);
+            background: linear-gradient(180deg, var(--theme-color) 0%, rgba(244, 63, 94, 1) 100%);
             color: white; 
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 16px; 
-            font-size: 15px; 
-            font-weight: 700; 
-            border-radius: 16px; 
+            font-size: 16px; 
+            font-weight: 700; /* Tulisan tombol tebal solid */
+            border-radius: 18px; 
             cursor: pointer; 
-            transition: opacity 0.2s, transform 0.1s; 
-            box-shadow: 0 10px 25px var(--theme-glow);
+            transition: all 0.2s ease; 
+            box-shadow: 0 12px 30px var(--theme-glow);
         }
-        button.btn-block:hover { opacity: 0.92; }
+        button.btn-block:hover { 
+            opacity: 0.95; 
+            box-shadow: 0 15px 35px var(--theme-glow);
+            transform: translateY(-1px);
+        }
         button.btn-block:active { transform: scale(0.98); }
     </style>
 </head>
@@ -310,11 +354,11 @@
     </div>
 
     <div class="color-palette">
-        <div class="color-dot active" style="background: #FF748C;" onclick="changeUITheme('#FF748C', 'rgba(255, 116, 140, 0.15)')"></div>
-        <div class="color-dot" style="background: #2DD4BF;" onclick="changeUITheme('#2DD4BF', 'rgba(45, 212, 191, 0.15)')"></div>
-        <div class="color-dot" style="background: #3B82F6;" onclick="changeUITheme('#3B82F6', 'rgba(59, 130, 246, 0.15)')"></div>
-        <div class="color-dot" style="background: #A855F7;" onclick="changeUITheme('#A855F7', 'rgba(168, 85, 247, 0.15)')"></div>
-        <div class="color-dot" style="background: #F59E0B;" onclick="changeUITheme('#F59E0B', 'rgba(245, 158, 11, 0.15)')"></div>
+        <div class="color-dot active" style="background: #FF5A79;" onclick="changeUITheme('#FF5A79', 'rgba(255, 90, 121, 0.35)')"></div>
+        <div class="color-dot" style="background: #2DD4BF;" onclick="changeUITheme('#2DD4BF', 'rgba(45, 212, 191, 0.35)')"></div>
+        <div class="color-dot" style="background: #3B82F6;" onclick="changeUITheme('#3B82F6', 'rgba(59, 130, 246, 0.35)')"></div>
+        <div class="color-dot" style="background: #A855F7;" onclick="changeUITheme('#A855F7', 'rgba(168, 85, 247, 0.35)')"></div>
+        <div class="color-dot" style="background: #F59E0B;" onclick="changeUITheme('#F59E0B', 'rgba(245, 158, 11, 0.35)')"></div>
     </div>
 
     <div class="form-group">
@@ -359,7 +403,6 @@
 </div>
 
 <script>
-    // Database Medis Asli Anda
     const medicalServicesDataset = {
         "IBU": [
             { name: "Massage Ibu Hamil", price: 80000 },
@@ -513,7 +556,6 @@
             return;
         }
 
-        // 1. WATERMARK BACKGROUND (Jika logo ada)
         if (base64LogoDataStream) {
             doc.saveGraphicsState();
             doc.setGState(new doc.GState({ opacity: 0.04 }));
@@ -521,61 +563,50 @@
             doc.restoreGraphicsState();
         }
 
-        // Banner Header Top diperluas untuk alamat
         doc.setFillColor(248, 250, 252);
         doc.rect(0, 0, 210, 48, "F");
 
-        // 2. HEADER LOGO UTAMA
         let textLeftMargin = 15;
         if (base64LogoDataStream) {
             doc.addImage(base64LogoDataStream, 'PNG', 15, 8, 26, 26, undefined, 'FAST');
             textLeftMargin = 46;
         }
 
-        // Judul Klinik / Brand Utama
-        doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(255, 116, 140);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(255, 90, 121);
         doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 16);
         
-        // Subheader Slogan
         doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(100, 116, 139);
         doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 22);
 
-        // PINDAH POSISI ALAMAT: Sekarang berada di bawah Layanan Kesehatan Ibu & Anak Terpercaya
         doc.setFont("helvetica", "italic"); doc.setFontSize(8.5); doc.setTextColor(115, 115, 115);
         doc.text("Dusun Klumprit Kulon No. 217 RT 1 RW 1 Klumprit, Nusawungu, Cilacap 53283", textLeftMargin, 27);
 
-        // Metadata Kwitansi (Sisi Kanan Atas)
         doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(51, 65, 85);
         doc.text("KWITANSI PEMBAYARAN", 195, 16, { align: "right" });
         doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
         doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 22, { align: "right" });
 
-        // Blok Informasi Pelanggan
         doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(71, 85, 105);
         doc.text("INFORMASI PASIEN", 15, 58);
         doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(15, 60, 195, 60);
 
-        // Pengaturan Perataan Titik Dua Sejajar Rapi
         doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
         doc.text("Nama Pelanggan / Pasien", 15, 67);
         doc.text("No. HP / WhatsApp", 15, 74);
 
-        // Titik dua disejajarkan rapi secara vertikal pada koordinat X = 60
         doc.text(":", 60, 67);
         doc.text(":", 60, 74);
 
-        // Isi Data Pelanggan
         doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
         doc.text(namaPasien, 64, 67);
         doc.text(nomorHp, 64, 74);
 
-        // Tabel Rincian Perawatan Terpilih (Posisi startY disesuaikan agar proporsional)
         doc.autoTable({
             startY: 82,
             head: [['No', 'Kategori Klien', 'Deskripsi Layanan Treatment', 'Harga Satuan']],
             body: selectedServices.map((s, idx) => [idx + 1, s.category, s.name, `Rp ${s.price.toLocaleString('id-ID')}`]),
             theme: 'striped',
-            headStyles: { fillColor: [255, 116, 140], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 10 },
+            headStyles: { fillColor: [255, 90, 121], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 10 },
             bodyStyles: { textColor: [51, 65, 85], fontSize: 9.5 },
             columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 42, fontStyle: 'bold' }, 3: { halign: 'right', cellWidth: 35 } },
             margin: { left: 15, right: 15 }
@@ -593,7 +624,6 @@
         doc.text("Potongan / Diskon:", 125, finalY + 13);
         doc.text(`- Rp ${diskon.toLocaleString('id-ID')}`, 190, finalY + 13, { align: "right" });
 
-        // Komponen Total Pembayaran Utama
         doc.setFillColor(255, 241, 242);
         doc.rect(120, finalY + 18, 75, 10, "F");
         doc.setFont("helvetica", "bold"); doc.setTextColor(225, 29, 72);
@@ -603,7 +633,6 @@
         doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
         doc.text("Terima kasih atas kepercayaan Anda.", 15, finalY + 24);
 
-        // Bagian Tanda Tangan Praktisi
         let signY = finalY + 45;
         if (signY > 265) { doc.addPage(); signY = 35; }
 
@@ -612,7 +641,6 @@
         doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
         doc.text("Tasya Hanifah Pramesti, A.Md.Keb., CBME", 155, signY + 20, { align: "center" });
 
-        // Ekspor berkas PDF
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         if (isIOS) {
             const pdfBase64 = doc.output('datauristring');
