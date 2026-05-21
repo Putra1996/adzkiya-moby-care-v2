@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Adzkiya Mom Baby Care - Premium Logo Edition</title>
+    <title>Adzkiya Mom Baby Care - Premium Edition</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
@@ -398,16 +398,13 @@
     };
 
     let selectedServices = [];
-    let base64LogoDataStream = ""; // Penyimpanan Data URI Logo
+    let base64LogoDataStream = ""; 
 
-    // Mengubah file gambar yang diupload ke Base64 secara instan
     function processLogoImageFile(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 base64LogoDataStream = e.target.result;
-                
-                // Tampilkan di UI utama sebagai watermark dinamis
                 const uiWatermark = document.getElementById('uiWatermarkView');
                 uiWatermark.src = base64LogoDataStream;
                 uiWatermark.style.display = "block";
@@ -419,21 +416,6 @@
     function changeUITheme(primaryColor, glowColor) {
         document.documentElement.style.setProperty('--theme-color', primaryColor);
         document.documentElement.style.setProperty('--theme-glow', glowColor);
-        document.querySelectorAll('.color-dot').forEach(dot => {
-            if (dot.style.backgroundColor === hexToRgb(primaryColor) || dot.style.backgroundColor === primaryColor) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
-        });
-    }
-
-    function hexToRgb(hex) {
-        const rgb = parseInt(hex.replace('#', ''), 16);
-        const r = (rgb >> 16) & 255;
-        const g = (rgb >> 8) & 255;
-        const b = rgb & 255;
-        return `rgb(${r}, ${g}, ${b})`;
     }
 
     function toggleUIVisualMode() {
@@ -531,61 +513,71 @@
             return;
         }
 
-        // 1. WATERMARK: Gambar latar belakang transparan (jika logo diupload)
+        // 1. WATERMARK BACKGROUND (Jika logo ada)
         if (base64LogoDataStream) {
             doc.saveGraphicsState();
-            doc.setGState(new doc.GState({ opacity: 0.04 })); // Sangat transparan agar teks terbaca
-            doc.addImage(base64LogoDataStream, 'PNG', 45, 85, 120, 120, undefined, 'FAST');
+            doc.setGState(new doc.GState({ opacity: 0.04 }));
+            doc.addImage(base64LogoDataStream, 'PNG', 45, 95, 120, 120, undefined, 'FAST');
             doc.restoreGraphicsState();
         }
 
-        // Desain Header Top Banner Background
+        // Banner Header Top diperluas untuk alamat
         doc.setFillColor(248, 250, 252);
-        doc.rect(0, 0, 210, 42, "F");
+        doc.rect(0, 0, 210, 48, "F");
 
-        // 2. HEADER LOGO: Memasukkan Logo Utama Aktif di Kiri Atas
+        // 2. HEADER LOGO UTAMA
         let textLeftMargin = 15;
         if (base64LogoDataStream) {
-            doc.addImage(base64LogoDataStream, 'PNG', 15, 8, 24, 24, undefined, 'FAST');
-            textLeftMargin = 44; // Beri ruang geser tulisan agar tidak menabrak logo
+            doc.addImage(base64LogoDataStream, 'PNG', 15, 8, 26, 26, undefined, 'FAST');
+            textLeftMargin = 46;
         }
 
         // Judul Klinik / Brand Utama
-        doc.setFont("helvetica", "bold"); doc.setFontSize(20); doc.setTextColor(255, 116, 140);
-        doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 20);
-        doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(100, 116, 139);
-        doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 26);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(255, 116, 140);
+        doc.text("ADZKIYA MOM BABY CARE", textLeftMargin, 16);
+        
+        // Subheader Slogan
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(100, 116, 139);
+        doc.text("Layanan Kesehatan Ibu & Anak Terpercaya", textLeftMargin, 22);
 
-        // Header Sisi Kanan (Metadata Kwitansi)
+        // PINDAH POSISI ALAMAT: Sekarang berada di bawah Layanan Kesehatan Ibu & Anak Terpercaya
+        doc.setFont("helvetica", "italic"); doc.setFontSize(8.5); doc.setTextColor(115, 115, 115);
+        doc.text("Dusun Klumprit Kulon No. 217 RT 1 RW 1 Klumprit, Nusawungu, Cilacap 53283", textLeftMargin, 27);
+
+        // Metadata Kwitansi (Sisi Kanan Atas)
         doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(51, 65, 85);
-        doc.text("KWITANSI PEMBAYARAN", 195, 20, { align: "right" });
+        doc.text("KWITANSI PEMBAYARAN", 195, 16, { align: "right" });
         doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(148, 163, 184);
-        doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 26, { align: "right" });
+        doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 195, 22, { align: "right" });
 
-        // Informasi Pelanggan
+        // Blok Informasi Pelanggan
         doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(71, 85, 105);
-        doc.text("INFORMASI PELANGGAN", 15, 54);
-        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(15, 56, 195, 56);
+        doc.text("INFORMASI PASIEN", 15, 58);
+        doc.setLineWidth(0.3); doc.setDrawColor(226, 232, 240); doc.line(15, 60, 195, 60);
 
+        // Pengaturan Perataan Titik Dua Sejajar Rapi
         doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(100, 116, 139);
-        doc.text("Nama Pelanggan :", 15, 64);
-        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
-        doc.text(namaPasien, 50, 64);
+        doc.text("Nama Pelanggan / Pasien", 15, 67);
+        doc.text("No. HP / WhatsApp", 15, 74);
 
-        doc.setFont("helvetica", "normal"); doc.setTextColor(100, 116, 139);
-        doc.text("No. HP / WhatsApp :", 15, 70);
-        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
-        doc.text(nomorHp, 50, 70);
+        // Titik dua disejajarkan rapi secara vertikal pada koordinat X = 60
+        doc.text(":", 60, 67);
+        doc.text(":", 60, 74);
 
-        // Tabel Rincian Perawatan Terpilih
+        // Isi Data Pelanggan
+        doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
+        doc.text(namaPasien, 64, 67);
+        doc.text(nomorHp, 64, 74);
+
+        // Tabel Rincian Perawatan Terpilih (Posisi startY disesuaikan agar proporsional)
         doc.autoTable({
-            startY: 78,
+            startY: 82,
             head: [['No', 'Kategori Klien', 'Deskripsi Layanan Treatment', 'Harga Satuan']],
             body: selectedServices.map((s, idx) => [idx + 1, s.category, s.name, `Rp ${s.price.toLocaleString('id-ID')}`]),
             theme: 'striped',
             headStyles: { fillColor: [255, 116, 140], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 10 },
             bodyStyles: { textColor: [51, 65, 85], fontSize: 9.5 },
-            columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 40, fontStyle: 'bold' }, 3: { halign: 'right', cellWidth: 35 } },
+            columnStyles: { 0: { cellWidth: 12 }, 1: { cellWidth: 42, fontStyle: 'bold' }, 3: { halign: 'right', cellWidth: 35 } },
             margin: { left: 15, right: 15 }
         });
 
@@ -620,7 +612,7 @@
         doc.setFont("helvetica", "bold"); doc.setTextColor(51, 65, 85);
         doc.text("Tasya Hanifah Pramesti, A.Md.Keb., CBME", 155, signY + 20, { align: "center" });
 
-        // Ekspor PDF Kompatibilitas Tinggi Cross-Platform
+        // Ekspor berkas PDF
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         if (isIOS) {
             const pdfBase64 = doc.output('datauristring');
